@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Scraper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .job-listing {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .job-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .company-name, .location, .experience {
+            margin: 5px 0;
+        }
+        .search-form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Job Search</h1>
+    <form method="post" class="search-form">
+        <input type="text" name="role" placeholder="Role" required>
+        <input type="text" name="location" placeholder="Location" required>
+        <input type="text" name="experience" placeholder="Experience (in years)" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if jobs %}
+        <h2>Job Listings</h2>
+        {% for job in jobs %}
+            <div class="job-listing">
+                <div class="job-title"><a href="{{ job['URL'] }}" target="_blank">{{ job['Job Title'] }}</a></div>
+                <div class="company-name"><strong>Company:</strong> {{ job['Company'] }}</div>
+                <div class="location"><strong>Location:</strong> {{ job['Location'] }}</div>
+                <div class="experience"><strong>Experience:</strong> {{ job['Experience'] }}</div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No jobs found.</p>
+    {% endif %}
+</body>
+</html>
